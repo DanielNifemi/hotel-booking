@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{reservation.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{reservation.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/reservations}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{reservation.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('reservation')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='room', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='user', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='checkInDate', required=true, inputClass='js-datepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='checkOutDate', required=true, inputClass='js-datepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='numberOfGuests', required=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='totalPrice', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='status', required=true, type='radio')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='createdAt', required=true, inputClass='js-datetimepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='updatedAt', required=true, inputClass='js-datetimepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='roomId', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='rooms', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='users', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='reservation', field='usersId', type='select')}" />
+                <input type="submit" th:value="#{reservation.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

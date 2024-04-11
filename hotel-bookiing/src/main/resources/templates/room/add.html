@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{room.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{room.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/rooms}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{room.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('room')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='hotel', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='roomNumber', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='type', required=true, type='radio')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='price', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='capacity', required=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='description')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='imageUrls')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='available', type='checkbox')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='createdAt', inputClass='js-datetimepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='updatedAt', inputClass='js-datetimepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='hotels', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='room', field='hotelId', type='select')}" />
+                <input type="submit" th:value="#{room.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

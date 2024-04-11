@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{hotel.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{hotel.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/hotels/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{hotel.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${hotels.empty}">[[#{hotel.list.empty}]]</div>
+            <div th:if="${!hotels.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left p-2">[[#{hotel.id.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.name.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.adress.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.rating.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.description.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.contactNumber.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.email.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{hotel.website.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="hotel : ${hotels}" class="odd:bg-gray-100">
+                            <td class="p-2">[[${hotel.id}]]</td>
+                            <td class="p-2">[[${hotel.name}]]</td>
+                            <td class="p-2">[[${hotel.adress}]]</td>
+                            <td class="p-2">[[${hotel.rating}]]</td>
+                            <td class="p-2">[[${hotel.description}]]</td>
+                            <td class="p-2">[[${hotel.contactNumber}]]</td>
+                            <td class="p-2">[[${hotel.email}]]</td>
+                            <td class="p-2">[[${hotel.website}]]</td>
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/hotels/edit/{id}(id=${hotel.id})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{hotel.list.edit}]]</a>
+                                    <form th:action="@{/hotels/delete/{id}(id=${hotel.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{hotel.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
